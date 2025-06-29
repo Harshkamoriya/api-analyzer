@@ -4,7 +4,7 @@ export interface TestRun {
   userId: string;
   url: string;
   method: string;
-  avgLatency: any;
+  avgLatency: number;
   minLatency: number;
   maxLatency: number;
   statusCodes: Record<string, number> | null;
@@ -16,7 +16,7 @@ export interface TestRun {
 // API response types
 export interface TestResult {
   success: boolean;
-  avgLatency?: any;
+  avgLatency?: number;
   minLatency?: number;
   maxLatency?: number;
   statusCodes?: Record<string, number>;

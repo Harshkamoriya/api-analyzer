@@ -23,7 +23,7 @@ export default async function Dashboard() {
     );
   }
 
-const tests = await prisma.testRun.findMany({
+const tests:any = await prisma.testRun.findMany({
   where: { userId },
   orderBy: { createdAt: 'desc' },
   take: 50,
@@ -44,9 +44,11 @@ const tests = await prisma.testRun.findMany({
 
 
   const totalTests = tests.length;
-const avgResponseTime = tests.length > 0
-  ? (tests.reduce((sum: number, test: TestRun) => sum + (test.avgLatency ?? 0), 0) / tests.length)
+const avgResponseTime: number = tests.length > 0
+  ? tests.reduce((sum:any, test:TestRun) => sum + (test.avgLatency ?? 0), 0) / tests.length
   : 0;
+
+
 
 
 const successfulTests = tests.filter((test: TestRun) => 
