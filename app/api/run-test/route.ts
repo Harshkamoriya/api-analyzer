@@ -2,10 +2,11 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { getOptimizationTips } from '@/lib/gemini';
 import axios from 'axios';
+import { NextRequest } from 'next/server';
 import { clerkClient } from '@clerk/clerk-sdk-node';
 import { auth } from '@clerk/nextjs/server';
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   console.log("[DEBUG] Received POST request");
 
   try {
@@ -22,8 +23,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    let latencies: number[] = [];
-    let statusCounts: Record<string, number> = {};
+    const latencies: number[] = [];
+    const statusCounts: Record<string, number> = {};
 
     for (let i = 0; i < 5; i++) {
       console.log(`[DEBUG] Sending request #${i+1} to URL: ${url} with method: ${method}`);

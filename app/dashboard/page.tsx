@@ -44,9 +44,10 @@ const tests = await prisma.testRun.findMany({
 
 
   const totalTests = tests.length;
-const avgResponseTime = tests.length > 0 
-  ? tests.reduce((sum: number, test: TestRun) => sum + test.avgLatency, 0) / tests.length 
+const avgResponseTime = tests.length > 0
+  ? (tests.reduce((sum: number, test: TestRun) => sum + (test.avgLatency ?? 0), 0) / tests.length)
   : 0;
+
 
 const successfulTests = tests.filter((test: TestRun) => 
   test.statusCodes && Object.keys(test.statusCodes).some(code => code.startsWith('2'))
